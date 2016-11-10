@@ -32,7 +32,7 @@ module.exports = function () {
             }
         ],
         //NUID of the student 
-        nuid : Number,
+        nuid : String,
         phone : String,
         gpa : Number,
         coursesTaken: [

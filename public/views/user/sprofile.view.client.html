@@ -1,5 +1,53 @@
-<div>
+<div class="container">
 
-    <h1> Student Profile</h1>
+    <h1> Welcome {{model.user.firstName}} Student Profile</h1>
 
 </div>
+
+<div class="container" >
+
+    <button type="button" class="btn btn-block btn">Apply For Job</button>
+    <p></p>
+    <button type="button" class="btn btn-block btn">My Jobs Dashboard</button>
+
+
+</div>
+
+<hr width="80%">
+<div class="container">
+    <div class="col-md-4  col-sm-6 col-xs-12">
+        <p><b>Email:</b> {{model.user.email}}</p>
+        <p><b>First Name:</b> {{model.user.firstName}}</p>
+        <p><b>Last Name:</b> {{model.user.lastName}}</p>
+        <p><b>NUID:</b> {{model.user.nuid}}</p>
+        <p><b>GPA:</b> {{model.user.gpa}}</p>
+        <p><b>Phone:</b> {{model.user.phone}}</p>
+        <p><b>Availability:</b> {{model.user.availability}}</p>
+        <p><b>Current Courses:</b> <p ng-repeat=" course in model.user.currentCourses">course.name</p> </p>
+        <p><b>Courses Taken:</b> <p ng-repeat=" taken in model.user.currentCourses">taken.name</p> </p>
+
+
+    </div>
+    <div class="col-md-8 col-sm-6 col-xs-12">
+        <p><b>Student Resume is displayed here</b></p>
+    </div>
+</div>
+
+<!-- Footer -->
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#/seditprofile">
+                <span>Edit Profile</span>
+            </a>
+        </p>
+
+
+
+        <p class="navbar-text pull-left">
+            <a ng-click = "model.logout()">Logout</a>
+            </a>
+        </p>
+
+    </div>
+</nav>

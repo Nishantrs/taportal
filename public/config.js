@@ -11,8 +11,29 @@
     function Config($routeProvider) {
         $routeProvider
 
+        // Faculty Profile
+            .when("/fprofile",{
+                templateUrl :"views/user/fprofile.view.client.html",
+                controller: "FProfileController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+
+            // Faculty Register
+            .when("/fregister",{
+                templateUrl: "views/user/fregister.view.client.html",
+                controller: "FRegisterController",
+                controllerAs: "model"
+                // ,
+                // resolve: {
+                //     freeView : freeView
+                // }
+            })
+
             // Student Profile
-            .when("/sprofile",{
+                    .when("/sprofile",{
                 templateUrl :"views/user/sprofile.view.client.html",
                 controller: "SProfileController",
                 controllerAs: "model",
@@ -20,6 +41,17 @@
                     loggedIn: checkLoggedIn
                 }
             })
+
+
+            .when("/seditprofile",{
+                templateUrl :"views/user/seditprofile.view.client.html",
+                controller: "SEditProfileController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+
 
             // Student Register
             .when("/sregister",{

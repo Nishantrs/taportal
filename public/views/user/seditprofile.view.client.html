@@ -1,0 +1,185 @@
+
+<!--Body-->
+<div class="container-fluid pushdown">
+    <div class="container-fluid">
+        <!-- Search Box -->
+
+        <p></p>
+        <p></p>
+        <div ng-if="model.success"
+             class="alert alert-success">
+            {{model.success}}
+        </div>
+
+        <div ng-if="model.error"
+             class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+        <div class="container">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input ng-model="model.user.username"
+                               type="text"
+                               class="form-control"
+                               id="username" placeholder="walice">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input ng-model="model.user.email"
+                               type="email"
+                               class="form-control"
+                               id="email"
+                               placeholder="alice.wonderland@unicorn.com">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input ng-model="model.user.firstName"
+                               type="text"
+                               class="form-control"
+                               id="first-name"
+                               placeholder="Alice">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input ng-model="model.user.lastName"
+                               type="text"
+                               class="form-control"
+                               id="last-name"
+                               placeholder="Wonderland">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <div class="container">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="nuid">NUID</label>
+                        <input ng-model="model.user.nuid"
+                               type="text"
+                               class="form-control"
+                               id="nuid"
+                               placeholder="0016XXXX">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input ng-model="model.user.phone"
+                               type="text"
+                               class="form-control"
+                               id="phone"
+                               placeholder="6174478952">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="coursestaken">Courses Taken</label>
+                        <!--Need to modify this, must allow user to  add multiple courses -->
+                        <input ng-model="model.user.coursesTaken.name"
+                               type="text"
+                               class="form-control"
+                               id="coursestaken"
+                               placeholder="Web Development">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="currentcourses">Current Courses</label>
+                        <input ng-model="model.user.currentCourses"
+                               type="text"
+                               class="form-control"
+                               id="currentcourses"
+                               placeholder="Algorithms">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="col-md-12 col-sm-6 col-xs-12">
+                <form>
+                    <div class="form-group">
+                        <label for="aboutmyself">About Myself</label>
+                        <input ng-model="model.user.aboutMyself"
+                               type="text"
+                               class="form-control"
+                               id="aboutmyself"
+                               placeholder="Algorithms">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <a class="btn btn-primary btn-block"
+           ng-click="model.updateUser(model.user)">Confirm Changes</a>
+        <a ng-click = "model.logout()"class="btn btn-danger btn-block">Logout</a>
+        <a class="btn btn-danger btn-block "
+           ng-click = "model.deleteUser()">un-register</a>
+
+    </div>
+</div>
+<!-- End of Body-->
+
+
+<!-- Footer -->
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#/sprofile">
+                <span>Profile</span>
+            </a>
+        </p>
+
+        <p class="navbar-text pull-left">
+            <a ng-click = "model.logout()">Logout</a>
+            </a>
+        </p>
+
+    </div>
+</nav>
+
+
