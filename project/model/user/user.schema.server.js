@@ -4,7 +4,7 @@
 //we create a schema
 
 module.exports = function () {
-    // mongoDb has no notion of schemas. this is at the application level
+    // MongoDB has no notion of schemas. this is at the application level
     var mongoose = require("mongoose");
 
     var UserSchema = mongoose.Schema ({
@@ -18,6 +18,7 @@ module.exports = function () {
         usertype: {type : String,  enum: ['student', 'faculty', 'admin']}, // type: student, faculty, admin
         image: String, // Image of the user
         aboutMyself: String, // Few lines about the user
+        isGrad: {type: Boolean, default: false}, // Might be required for scoring based on education level
 
 
         resumeURL: String,

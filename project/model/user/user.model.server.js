@@ -128,8 +128,8 @@ module.exports = function () {
                     // currentCourses: user.currentCourses, // to fix a bug - by srivatsav
                     // coursesTaken: user.coursesTaken, // to fix a bug - by srivatsav
                     gpa: user.gpa,
-                    aboutMyself: user.aboutMyself
-
+                    aboutMyself: user.aboutMyself,
+                    isGrad: user.isGrad
                 }}
             );
     }

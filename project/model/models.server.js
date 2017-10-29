@@ -1,6 +1,5 @@
-/*entry gate in to the database connection */
-//Author: Sesha Sai Srivatsav
-// we create a node JS module
+// entry gate in to the database connection
+// Node JS module
 module.exports  = function () {
 
     var models = {
@@ -8,9 +7,8 @@ module.exports  = function () {
         courseModel : require ("./user/course.model.server")(),
         semesterModel : require ("./user/semester.model.server")(),
         positionModel: require ("./user/position.model.server")(),
-        applicationModel: require("./user/application.model.server")()
-
-
+        applicationModel: require("./user/application.model.server")(),
+        scoreModel: require("./user/score.model.server")()
     };
     return models;
 };

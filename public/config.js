@@ -160,6 +160,15 @@
                 }
             })
 
+            .when("/setscore",{
+                templateUrl :"views/admin/setscore.view.client.html",
+                controller: "SetScoreController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+
             // Faculty Register
             .when("/fregister",{
                 templateUrl: "views/faculty/fregsiter.view.client.html",
