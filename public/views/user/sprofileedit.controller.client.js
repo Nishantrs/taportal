@@ -78,6 +78,7 @@
                     var updatedUser = res.data;
                     if(updatedUser){
                         vm.success="Successfully Deleted courses";
+                        console.log(updatedUser);
                         init();
                     }else {
                         vm.error="Something is off";

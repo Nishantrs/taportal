@@ -57,6 +57,10 @@
                         }else{
                             vm.error = response.data;
                         }
+                    },function(err)
+                    {
+                        console.log(err);
+                        vm.error = "Invalid Credential";
                     });
             }
         }

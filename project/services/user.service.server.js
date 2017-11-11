@@ -514,7 +514,7 @@ module.exports= function(app, models){
                 .updateResumeOfStudent(UserId, resume)
                 .then(
                     function(user) {
-                        res.send(200);
+                        res.sendStatus(200);
                         // res.redirect("/sprofile");
                     },
                     function(err) {

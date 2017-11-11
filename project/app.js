@@ -9,6 +9,6 @@ module.exports = function (app) {
     require("./services/coursesandsemesters.service.server.js")(app, models);
     require("./services/position.service.server.js")(app,models);
     require("./services/application.service.server.js")(app,models);
-
+    require("./services/score.service.server.js")(app,models);
 };
 

@@ -1,3 +1,4 @@
+// Author : Nishant Shetty
 module.exports = function () {
 
     var mongoose = require("mongoose");
@@ -17,7 +18,7 @@ module.exports = function () {
     return api;
 
 
-    function findScoreById(scoreId) {u
+    function findScoreById(scoreId) {
         return Score.findById({_id: scoreId});
     }
 
@@ -49,8 +50,9 @@ module.exports = function () {
                     grade: score.grade,
                     availability: score.availability,
                     availabilityRatio: score.availabilityRatio,
-                    gradRatio: score.gradRatio,
-                    early: score.early
+                    gradRatio: score.gradRatio
+                    //,
+                    //early: score.early
                 }}
             );
     }
@@ -58,17 +60,18 @@ module.exports = function () {
     function updateScoreByName(scoreName, score) {
         delete score._id;
         return Score
-            .update({name: scoreName},{
-                $set: {name: score.username,
-                    recommendation : score.recommendation,
-                    wasTA : score.wasTA,
-                    preference: score.preference,
-                    gpa : score.gpa,
-                    grade: score.grade,
-                    availability: score.availability,
-                    availabilityRatio: score.availabilityRatio,
-                    gradRatio: score.gradRatio,
-                    early: score.early
+            .findOneAndUpdate({name: scoreName},{
+                $set: {
+                    recommendation : +score.recommendation,
+                    wasTA : +score.wasTA,
+                    preference: +score.preference,
+                    gpa : +score.gpa,
+                    grade: +score.grade,
+                    availability: +score.availability,
+                    availabilityRatio: +score.availabilityRatio,
+                    gradRatio: +score.gradRatio
+                    //,
+                    //early: score.early
                 }}
             );
     }

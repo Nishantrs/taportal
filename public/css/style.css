@@ -17,3 +17,11 @@ body{
     width: 150px;
     height: 40px;
 }
+
+.little-spacing
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: #000000;
+    border-width: 1px;
+}

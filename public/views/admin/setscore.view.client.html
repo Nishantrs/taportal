@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html>
+<div class="container-fluid">
+<title>Scoring Parameters</title>
+    <h1>Set weightage for parameter used for scoring</h1>
+    <h2>Global Parameter</h2>
+    <div ng-show="model.ssmessage" class="alert alert-danger text-center" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        &nbsp;{{model.ssmessage}}
+    </div>
+    <h3>Recommendation: {{model.displayScore.recommendation}}%</h3>
+    <h3>Already TA: {{model.displayScore.wasTA}}%</h3>
+    <h3>Student Preference: {{model.displayScore.preference}}%</h3>
+    <h3>GPA: {{model.displayScore.gpa}}%</h3>
+    <h3>Grade in course: {{model.displayScore.grade}}%</h3>
+    <h3>Availability: {{model.displayScore.availability}}%</h3>
+    <h3>Availability ratio: {{model.displayScore.availabilityRatio}}</h3>
+    <h3>Grade Ratio: {{model.displayScore.gradRatio}}</h3>
+    <h3></h3>
+    <hr class="little-spacing">
+
+        <btn ng-click="model.scoreEdit()" class="btn btn-block btn-primary"><i class="glyphicon glyphicon-pencil"></i> Edit </btn>
+        <btn ng-if="model.isFirst" ng-click="model.save(model.displayScore)" class="btn btn-block btn-primary">
+            <i class="glyphicon glyphicon-ok"></i> Save </btn>
+    <div ng-show="model.userdetailsedit">
+    <h3>Recommendation: <input type="text"  class="form-control small-text" ng-model="model.updateScore.recommendation">%</h3>
+    <h3>Already TA: <input type="text"  class="form-control small-text" ng-model="model.updateScore.wasTA">%</h3>
+    <h3>Student Preference: <input type="text"  class="form-control small-text" ng-model="model.updateScore.preference">%</h3>
+    <h3>GPA: <input type="text"  class="form-control small-text" ng-model="model.updateScore.gpa">%</h3>
+    <h3>Grade in course: <input type="text"  class="form-control small-text" ng-model="model.updateScore.grade">%</h3>
+    <h3>Availability: <input type="text"  class="form-control small-text" ng-model="model.updateScore.availability">%</h3>
+    <h3>Availability ratio: <input type="text"  class="form-control small-text" ng-model="model.updateScore.availabilityRatio"></h3>
+    <h3>Grade Ratio: <input type="text"  class="form-control small-text" ng-model="model.updateScore.gradRatio"></h3>
+        <btn ng-if="!model.isFirst" ng-click="model.scoreUpdate(model.updateScore)" class="btn btn-block btn-primary"><i class="glyphicon glyphicon-pencil"></i> Update </btn>
+        <btn ng-click="model.scoreEditCancel()" class="btn btn-block btn-primary"><i class="glyphicon glyphicon-remove"></i> Cancel </btn>
+    </div>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a ng-click = "model.logout()">Logout</a>
+            </a>
+        </p>
+
+        <p class="navbar-text pull-left">
+            <a href="#/aconsole">
+                <span>Back</span>
+            </a>
+        </p>
+
+    </div>
+</nav>

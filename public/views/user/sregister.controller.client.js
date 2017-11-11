@@ -15,7 +15,7 @@
         //                      Developed by Srivatsav                                                      //
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        function register(username, password, vpassword, firstName, lastName, email, usertype) {
+        function register(username, password, vpassword, firstName, lastName, email) {
             var usertype = "student";
             if(vm.myform.$valid == false){
                 vm.error = "Enter the username/password";
@@ -27,12 +27,14 @@
                 UserService
                     .register(username,password, firstName, lastName, email, usertype)
                     .then(function (response) {
+                            //console.log("Response received");
                             var user = response.data;
                             if(user){
                                 $location.url("/seditprofile");
                             }
                         },
                         function (err) {
+                            //console.log("It's not working");
                             vm.error = err;
                         });
             }

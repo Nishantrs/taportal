@@ -1,3 +1,4 @@
+// Author : Nishant Shetty
 module.exports = function () {
     var mongoose = require("mongoose");
 
@@ -37,18 +38,18 @@ module.exports = function () {
                 message: '{VALUE} is not an integer value'
             }
         },
-        // Fields that might be needed based on Dean's discretion
         gpa: {
             type: Number,
             min: 0,
             max: 100,
             default : 0,
-            required: false,
+            required: true,
             validate: {
                 validator: Number.isInteger,
                 message: '{VALUE} is not an integer value'
             }
         },
+        // Fields that might be needed based on Dean's discretion
         grade: {
             type: Number,
             min: 0,
@@ -92,18 +93,19 @@ module.exports = function () {
                 validator: Number.isInteger,
                 message: '{VALUE} is not an integer value'
             }
-        },
-        early: {
-            type: Number,
-            min: 0,
-            max: 100,
-            default: 0,
-            required: false,
-            validate: {
-                validator: Number.isInteger,
-                message: '{VALUE} is not an integer value'
-            }
         }
+        //,
+        //early: {
+        //    type: Number,
+        //    min: 0,
+        //    max: 100,
+        //    default: 0,
+        //    required: false,
+        //    validate: {
+        //        validator: Number.isInteger,
+        //        message: '{VALUE} is not an integer value'
+        //    }
+        //}
     }, {collection: 'taportal.score'});
     return ScoreSchema;
 };

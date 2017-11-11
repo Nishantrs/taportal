@@ -8,6 +8,10 @@ module.exports = function () {
     var UserSchema = require("./user.schema.server")();
     var User =  mongoose.model("User", UserSchema);
 
+    //*****Delete if not required
+    var ScoreSchema = require("./score.schema.server")();
+    var ScoreModel = mongoose.model("ScoreModel", ScoreSchema);
+
     var api = {
 
         createUser: createUser,
@@ -28,8 +32,6 @@ module.exports = function () {
 
     };
     return api;
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //                      Developed by Srivatsav                                                      //
@@ -93,7 +95,7 @@ module.exports = function () {
     function deleteCurrentCourse(userId, coursename) {
         return User
             .update({_id: userId},{
-                $pull:{coursesTaken: coursename.course}
+                $pull:{currentCourses: coursename.course}
             });
     }
     
@@ -149,16 +151,12 @@ module.exports = function () {
     // Creates a new user Object
     // Author: Sesha Sai Srivatsav
     function createUser(user){
+        //var score =  ScoreModel.findScoreByName("global");
+
         return  User.create(user);
     }
 
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                      Developed by Anvita                                                      //
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     function updateResumeOfStudent(userId, resume) {
-        // delete user._id;
         return User
             .update({_id: userId},{
                 $set: {resumeURL : resume.url,
@@ -166,11 +164,7 @@ module.exports = function () {
             );
     }
 
-
-
     function rateStudentByFaculty(stuId, ratingFull) {
-
-
         return User
             .update({_id: stuId},{
                 "$set": { "rating": ratingFull
@@ -179,19 +173,10 @@ module.exports = function () {
     }
 
     function UpdateAverageRating(stuId, ratingavg) {
-
-
         return User
             .update({_id: stuId},{
                 "$set": { "avgRating": ratingavg
                 }}
             );
     }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                      Developed by Manognya                                                      //
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 };
