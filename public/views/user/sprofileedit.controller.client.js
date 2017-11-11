@@ -21,7 +21,6 @@
         vm.addUserCourses = addUserCourses;
         vm.deleteUserCourse = deleteUserCourse;
 
-
         var user;
         var oldCoursesCurrent;
         var oldCoursesTaken;
@@ -38,7 +37,16 @@
             UserService
                 .findUserById(userId)
                 .then(function (response) {
-                    vm.user = response.data;
+                    var savedScore = response.data;
+
+                    var attribute = 'isGrad';
+
+                    if(savedScore.isGrad) {
+                        savedScore[attribute] = 'Yes';
+                    } else {
+                        savedScore[attribute] = 'No';
+                    }
+                    vm.user = savedScore;
                     user = vm.user;
                     // oldCoursesCurrent = user.currentCourses;
                     // oldCoursesTaken = user.coursesTaken;
@@ -168,6 +176,12 @@
                 vm.alert = "* Enter the fields";
 
             }else {
+
+                if(user.isGrad == 'Yes') {
+                    user.isGrad = true;
+                } else {
+                    user.isGrad = false;
+                }
                 UserService
                     .updateUser(userId, user)
                     .then(function (res) {

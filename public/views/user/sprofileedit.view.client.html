@@ -102,7 +102,7 @@
 
 
 
-        <label for="last-name">GPA</label>
+        <label for="gpa">GPA</label>
         <input ng-model="model.user.gpa"
                type="text"
                name="gpa"
@@ -112,6 +112,20 @@
 
             <span   class="alert-class"
                     ng-show="model.myform.gpa.$invalid">
+                    {{model.alert}}
+            </span>
+        <br/>
+
+        <label for="graduate">Graduate(Yes/No)</label>
+        <input ng-model="model.user.isGrad"
+               type="text"
+               name="gpa"
+               class="form-control"
+               id="graduate"
+               placeholder="No" required>
+
+            <span   class="alert-class"
+                    ng-show="model.myform.isGrad.$invalid">
                     {{model.alert}}
             </span>
         <br/>
