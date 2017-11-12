@@ -10,13 +10,19 @@
     /* HTML and Java script communicate via scope */
     /* handles the JAVA Script */
 
-    function ChooseCourseController($routeParams, $location, UserService, $rootScope,PositionService, applicationsService) {
+    function ChooseCourseController($routeParams, $location, UserService, $rootScope,PositionService) {
         var vm = this;
+        var userId = $rootScope.currentUser._id;
 
         vm.logout = logout;
 
 
         function init(){
+            UserService
+                .findUserById(userId)
+                .then(function (response) {
+                    vm.user = response.data;
+                });
             findAllPositions();
 
         }
@@ -64,11 +70,6 @@
                     }
                 );
         }
-
-
-
-
-
     }
 
 

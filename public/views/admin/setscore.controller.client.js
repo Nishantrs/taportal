@@ -38,7 +38,7 @@
                     .then(function(response)
                     {
                         var scoreStored = response.data;
-                        console.log(scoreStored);
+                        //console.log(scoreStored);
 
                         if(scoreStored)
                         {

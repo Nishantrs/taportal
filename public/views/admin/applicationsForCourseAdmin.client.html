@@ -58,7 +58,13 @@
 
             <th><a ng-click="model.orderByField='ratingvalue';
                              model.reverseSort = !model.reverseSort">
-                Current Rating
+                Rating
+            </a>
+            </th>
+
+            <th><a ng-click="model.orderByField='scoring';
+                             model.reverseSort = !model.reverseSort">
+                Score
             </a>
             </th>
 
@@ -85,6 +91,7 @@
                 <td>{{ application.availability }}</td>
                 <td><a href="#/UserInfo/{{application._user}}">{{ application.username }}</a></td>
                 <td> {{application.ratingvalue}} </td>
+                <td> {{application.score}} </td>
                 <td> {{application.status}} </td>
 
                 <td>
@@ -163,8 +170,8 @@
         </p>
 
         <p class="navbar-text pull-left">
-            <a href="#/aprofile">
-                <span>Back to Profile</span>
+            <a  href="#/aconsole">
+                <span>Back to AdminConsole</span>
             </a>
         </p>
 
