@@ -25,3 +25,10 @@ body{
     border-color: #000000;
     border-width: 1px;
 }
+
+.content {
+    background: #efefef;
+    padding: 20px;
+    margin-top: 25px;
+    line-height: 1.8;
+}

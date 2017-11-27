@@ -4,6 +4,7 @@
 
 
 (function () {
-    angular.module ("TaPortal", ["ngRoute"]);
+    //angular.module ("TaPortal", ["ngRoute","csvDirectives","ngCsvImport"]);
+    angular.module ("TaPortal", ["ngRoute","csvDirectives"]);
 })();
 

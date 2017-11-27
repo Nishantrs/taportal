@@ -28,7 +28,19 @@
 <!--                     Manage TA positions                            -->
 <!------------------------------------------------------------------------>
 <div class="container">
+
+    <!--<input type="file" read-csv-file="fileContent" />-->
+    <!--<div>{{fileContent}}</div>-->
+    <h4>Select .csv file</h4>
+    <!--<div class="ng-csv-import" content="csv.content" header="csv.header" separator="csv.separator" result="csv.result"></div>-->
+    <div>
+    <input class="btn cta gray" read-csv-file="fileContent" type="file" accept=".csv">
+        <div ng-if="fileContent" class="content">
+            {{fileContent}}
+        </div>
+    </div>
     <h4 ><b>Manage TA Positions</b></h4>
+
     <div class="table-responsive">
         <table class="table">
             <thead>
