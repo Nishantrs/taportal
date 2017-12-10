@@ -34,9 +34,13 @@
     <h4>Select .csv file</h4>
     <!--<div class="ng-csv-import" content="csv.content" header="csv.header" separator="csv.separator" result="csv.result"></div>-->
     <div>
-    <input class="btn cta gray" read-csv-file="fileContent" type="file" accept=".csv">
-        <div ng-if="fileContent" class="content">
-            {{fileContent}}
+    <input class="btn cta gray" read-csv-file="model.fileContent" type="file" accept=".csv">
+        <div ng-if="model.fileContent" class="content">
+            {{model.fileContent}}
+        </div>
+        <tr></tr>
+        <div ng-if="model.fileContent">
+            <button type="submit" class="btn btn-block btn-primary" ng-click="model.createPositions(model.fileContent)">Create Positions</button>
         </div>
     </div>
     <h4 ><b>Manage TA Positions</b></h4>
@@ -50,6 +54,7 @@
                 <th>Semester</th>
                 <th># Positions</th>
                 <th>Lecturer</th>
+                <th>Username</th>
                 <th>Deadline</th>
                 <th>Create</th>
             </tr>
@@ -96,6 +101,13 @@
                            placeholder="Professor name"/>
                 </td>
 
+                <!-- Professor Username -->
+                <td>
+                    <input type="text"
+                           ng-model="model.profUsername"
+                           placeholder="Professor username"/>
+                </td>
+
                 <!-- Deadline for this position-->
                 <td><input type="date"
                            ng-model="model.deadline"
@@ -103,7 +115,7 @@
 
 
                 <td>
-                    <a ng-click="model.createPosition(model.coursename, model.semestername,model.number, model.professor, model.deadline )"
+                    <a ng-click="model.createPosition(model.coursename, model.semestername,model.number, model.professor, model.profUsername, model.deadline )"
                        class="btn btn-block btn-primary">
                         Create
                     </a>
@@ -140,11 +152,12 @@
             <th><a ng-click="model.orderByField='number';
                              model.reverseSort = !model.reverseSort">
                 # Positions
-            </a>
+            </a></th>
             <th><a ng-click="model.orderByField='lecturer';
                              model.reverseSort = !model.reverseSort">
                 Lecturer
-            </a>
+            </a></th>
+            <th>Username</th>
             <th>Deadline</th>
 
             <th>Update Position</th>
@@ -188,6 +201,11 @@
                 <td><input type="text"
                            ng-model="position.professor"
                            placeholder="professor Name"/></td>
+
+                <!--Username-->
+                <td><input type="text"
+                           ng-model="position.username"
+                           placeholder="professor username"/></td>
 
                 <!--Deadline-->
                 <td><input type="date"

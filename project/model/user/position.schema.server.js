@@ -10,7 +10,7 @@ module.exports = function () {
                 semester: String, // from the drop down of semesters, we will select a semester
                 number: Number,//No of positions offered for this position
                 professor : String, //Course offered under
-                username : [String], // username of professor
+                username : String, // username of professor
                 deadline: Date //Deadline to apply for the position
     
 

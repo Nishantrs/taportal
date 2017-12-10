@@ -1,6 +1,14 @@
 
 <div class="container-fluid">
     <h1>Applications for {{model.Position.course}} TA Positions</h1>
+    <br>
+    <div>
+        <a ng-click="model.showStudentsByProfPreference()"
+           class="btn btn-block btn-primary">
+            Get Professor Preference
+        </a>
+    </div>
+    <br>
     <div class="table-responsive">
         <table class="table table-hover">
             <!-- Table header--------->
@@ -62,7 +70,7 @@
             </a>
             </th>
 
-            <th><a ng-click="model.orderByField='scoring';
+            <th><a ng-click="model.orderByField='score';
                              model.reverseSort = !model.reverseSort">
                 Score
             </a>

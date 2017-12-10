@@ -1,11 +1,3 @@
-/**
- * Created by seshasai on 11/17/2016.
- */
-
-
-/**
- * Created by seshasai on 11/16/2016.
- */
 ///ManageCoursesSemestersController
 
 (function () {
@@ -13,23 +5,33 @@
         .module("TaPortal")
         .controller("ManageCreatePositionsController",ManageCreatePositionsController);
 
-    function ManageCreatePositionsController($rootScope, $location, $sce, PositionService, UserService,CoursesandSemestersService) {
+    function ManageCreatePositionsController($rootScope, $location, $sce, PositionService, UserService,CoursesandSemestersService,
+                                             applicationsService) {
         var vm = this;
+        //var userId = $rootScope.currentUser._id;
+
+        vm.fileContent = null;
 
         vm.createPosition = createPosition;
         vm.updatePosition  = updatePosition;
         vm.deletePosition = deletePosition;
         vm.updateDeadline = updateDeadline;
+        vm.createPositions = createPositions;
         vm.logout = logout;
         
         vm.orderByField = 'course';
         vm.reverseOrder = false;
 
         function init() {
+            vm.fileContent = null;
             findAllPositions();
             getLoggedInUser();
             findAllCourses();
             findAllSemesters();
+
+            //if(userId){
+            //    $location.url("/createandmanageapplications");
+            //}
         }
         init();
 
@@ -79,13 +81,14 @@
 
         // Author: Sesha Sai Srivatsav
 
-        function createPosition(coursename, semestername, number, professor, deadline) {
+        function createPosition(coursename, semestername, number, professor, username, deadline) {
             //console.log("from create " + deadline);
             var position = {
                 course : coursename,
                 semester : semestername,
                 number : number,
                 professor : professor,
+                username : username,
                 deadline :deadline
             };
 
@@ -132,24 +135,47 @@
 
         // Author: Sesha Sai Srivatsav
 
+        var deleteApplnBeforePosDelete = function(application,doneCallback) {
+            console.log("appln +1");
+            applicationsService
+                .deleteApplication(application._id)
+                .then(function(response) {
+                    return doneCallback(null);
+                },function(error) {
+                    console.log("Cannot find application to delete: "+ error);
+                });
+        }
+
         function deletePosition(positionId) {
-            PositionService
-                .deletePosition(positionId)
-                .then(
-                    function (response) {
-                        vm.warning = "Deleted Successfully!";
-                        vm.createsuccess = null;
-                        // PositionService
-                        //     .findAllPositions()
-                        //     .then(
-                        //         function (response) {
-                        //             vm.positions = response.data;
-                        //             vm.positionCount = vm.positions.length;
-                        //         }
-                        //     );
-                        init();
+
+            applicationsService
+                .getApplicationsForPosition(positionId)
+                .then(function (response) {
+                    if(response) {
+                        var positionApplications = response.data;
+                        // Now get students from application and sort them based on rating and
+                        // individual preference of students
+                        console.log("positionApplications for deletion");
+                        console.log(positionApplications.length);
+                        async.each(positionApplications, deleteApplnBeforePosDelete, function (response) {
+
+                            console.log("Finished applications deletion!!!!");
+                            PositionService
+                                .deletePosition(positionId)
+                                .then(
+                                    function (response) {
+                                        vm.warning = "Deleted Successfully!";
+                                        vm.createsuccess = null;
+                                        init();
+                                    }
+                                )
+                        });
+                    } else {
+                        console.log("No application found for position");
                     }
-                )
+                }, function (error) {
+                    console.log("Cannot find applications for position: "+ error);
+                });
         }
 
         // Author: Sesha Sai Srivatsav
@@ -186,6 +212,40 @@
                 vm.notloggedIn = "true";
 
             }
+        }
+
+        function createPositions(positionArr) {
+            console.log("In here");
+            for (i = 0; i < positionArr.length; i++)
+            {
+                var positionTuple = positionArr[i];
+
+                if (positionTuple["course"] == "")
+                {
+                    continue;
+                }
+
+                var position = {
+                    course : positionTuple["course"],
+                    semester : positionTuple["semester"],
+                    number : +positionTuple["number"],
+                    professor : positionTuple["professor"],
+                    username : positionTuple["username"],
+                    deadline : new Date(positionTuple["deadline"])
+                };
+
+                // Validations can be done for the positions for repeated entry
+                PositionService
+                    .createPosition(position)
+                    .then(
+                        function (response) {
+                            //vm.createsuccess = "Created TA Position Successfully";
+                            // Handle errors here
+                            console.log("Created TA Position Successfully " + i)
+                        }
+                    )
+            }
+            init();
         }
 
         // Author: Sesha Sai Srivatsav

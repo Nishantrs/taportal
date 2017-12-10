@@ -46,7 +46,7 @@ module.exports = function () {
         rating :[
             {
                 _user : {type : mongoose.Schema.ObjectId, ref: "User"}, //in model
-                ratedBy: String,
+                //ratedBy: String,
                 rating: Number
             }
         ],

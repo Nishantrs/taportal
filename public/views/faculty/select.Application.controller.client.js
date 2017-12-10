@@ -12,6 +12,7 @@
 
     function selectedApplicationController($routeParams, $location, UserService, $rootScope,PositionService, applicationsService) {
         var vm = this;
+        var apps2 = [] ;
 
 
         // Author: Srivatsav | for sorting
@@ -107,59 +108,63 @@
 
 
 
+        var findUserRatingDetails = function(application, doneCallBack) {
+            var sid = application._user;
+            UserService
+                .findUserById(sid).then(
+                function(response1){
+                    var student = response1.data;
+                    var ratingavg = student.avgRating;
 
+                    var rateval = 2;
+                    if(ratingavg > 2){
+                        rateval = ratingavg;
+                    }
+
+                    var profRating = 2;
+                    for(var k = 0; k < student.rating.length; k++) {
+                        if(student.rating[k]._user == faculty._id) {
+                            profRating = student.rating[k].rating;
+                        }
+                    }
+                    var app1 = {
+                        "avgRating" :     application.avgRating       ,
+                        "gpa"  :          application.gpa             ,
+                        "coursesTaken" :  application.coursesTaken    ,
+                        "currentCourses": application.currentCourses  ,
+                        "email" :         application.email           ,
+                        "phone"  :        application.phone           ,
+                        "resumeURL" :     application.resumeURL       ,
+                        "resumeName" :    application.resumeName      ,
+                        "_id":application._id,"priority":application.priority,"_position":application._position,
+                        "previouslyTaken":application.previouslyTaken,"gradeObtained":application.gradeObtained,
+                        "beenTASemester":application.beenTASemester,"availability": application.availability,
+                        "_user":application._user,"__v":application.__v,
+                        "rating":application.rating,
+                        "ratingvalue": rateval, username: student.username,
+                        "profRating" : profRating
+                    };
+
+                    apps2.push(app1);
+                    return doneCallBack(null);
+                });
+        }
 
 
         function getApplications(position) {
+
             applicationsService
                 .getApplicationsForPosition(position._id)
                 .then(function(response){
                         var apps1 = response.data;
 
-                        //    console.log(apps1.length);
-                        var apps2 = [] ;
-                        var j = -1;
-                        var ratingGiven = 1;
-                        for(var i =0; i<apps1.length; i++){
-                            var sid = apps1[i]._user;
-                            UserService
-                                .findUserById(sid).then(
-                                function(response1){
-                                    j++;
-                                    var   ratingavg = response1.data.avgRating;
+                    async.each(apps1, findUserRatingDetails, function (response) {
+                        $rootScope.apps = apps2;
+                        apps2 = [];
+                        console.log("Finished!");
 
-                                    var rateval = 1;
-                                    if(ratingavg > 1){
-                                        rateval = ratingavg;
-                                    }
-                                    var   app1 = {
-                                        "avgRating" :     apps1[j].avgRating       ,
-                                        "gpa"  :          apps1[j].gpa             ,
-                                        "coursesTaken" :  apps1[j].coursesTaken    ,
-                                        "currentCourses": apps1[j].currentCourses  ,
-                                        "email" :         apps1[j].email           ,
-                                        "phone"  :        apps1[j].phone           ,
-                                        "resumeURL" :     apps1[j].resumeURL       ,
-                                        "resumeName" :    apps1[j].resumeName      ,
-                                        "_id":apps1[j]._id,"priority":apps1[j].priority,"_position":apps1[j]._position,
-                                        "previouslyTaken":apps1[j].previouslyTaken,"gradeObtained":apps1[j].gradeObtained,
-                                        "beenTASemester":apps1[j].beenTASemester,"availability": apps1[j].availability,
-                                        "_user":apps1[j]._user,"__v":apps1[j].__v,"rating":apps1[j].rating,
-                                        "ratingvalue": rateval, username: response1.data.username
-
-                                    };
-
-                                    apps2.push(app1);
-
-                                    $rootScope.apps = apps2;
-
-                                });
-
-                        }
-
-                    }
-
-                );
+                    });
+                });
 
         }
 
@@ -177,14 +182,14 @@
                 .then(function (response) {
                     var pos = response.data;
 
-                    for(i=0; i<pos.length; i++){
+                    for(var i=0; i<pos.length; i++){
                         var temp = pos[i].deadline;
                         pos[i].deadline = new Date(temp);
                     }
 
 
                     vm.positions = pos;
-                    possss = pos[-1];
+                    //var possss = pos[-1];
                     //console.log(  vm.positions);
                     vm.positionCount = vm.positions.length;
 
