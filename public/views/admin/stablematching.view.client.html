@@ -1,19 +1,99 @@
 <div class="container-fluid">
     <title>Stable Matching Algorithm</title>
-    <h1>Stable Matching Algorithm</h1>
-    <div ng-repeat="mapping in finalData">
-        <!--<div ng-repeat="day in week.days">-->
+    <h1>TA Assignments</h1>
+    <div ng-if="!model.showModifiedMapping" ng-repeat="mapping in finalData">
         <b><i>{{mapping.pos.course}} - {{mapping.pos.professor}} - {{mapping.pos.number}}</i></b><br/>
-            <!--<b>Students selected:</b><br/>-->
-            <ul>
+            <ol>
                 <li ng-repeat="student in mapping.students">
-                    {{student.firstName}} {{student.lastName}}, {{student.email}}
+                    <i>{{student.firstName}} {{student.lastName}}</i>, {{student.email}}
                 </li>
-            </ul>
-        <!--</div>-->
-
+            </ol>
+        <hr class="little-spacing">
+    </div>
+    <div ng-if="model.showModifiedMapping" ng-repeat="modifiedMapping in MappingData">
+        <b><i>{{modifiedMapping.positionName}} - {{modifiedMapping.professor}} - {{modifiedMapping.number}}</i></b><br/>
+        <ol>
+            <li ng-repeat="student in modifiedMapping.students">
+                <i>{{student.firstName}} {{student.lastName}}</i>, {{student.email}}&nbsp&nbsp&nbsp
+                <a ng-click="model.removeStudentFromPosition($parent.$index,$index)"
+                   class="button btn">
+                    &nbsp&nbspRemove&nbsp&nbsp
+                </a>
+            </li>
+            <p>&nbsp</p>
+        </ol>
+        <hr class="little-spacing">
+    </div>
+    <div ng-if="model.showModifiedMapping" ng-repeat="modifiedMapping in UnMappingData">
+        <b><i>Unassigned Students</i></b><br/>
+        <ol>
+            <li ng-repeat="student in modifiedMapping.students">
+                <i>{{student.firstName}} {{student.lastName}}</i>, {{student.email}}&nbsp&nbsp&nbsp
+                <a ng-click="model.addStudentToPosition(position.name,$index)"
+                   class="btn button_add">
+                    &nbsp&nbspAdd&nbsp&nbsp
+                </a><br>
+                <select type="string"
+                        class="form-control"
+                        placeholder="select course name"
+                        ng-model="position.name">
+                    <option value="">- select course name -</option>
+                    <option ng-repeat="position in MappingData">{{position.positionName}}</option>
+                </select>
+                <hr>
+            </li>
+        </ol>
+    </div>
+    <div ng-if="!model.publishMapping && !model.showModifiedMapping">
+        <a ng-click="model.publishMappingResults()"
+           class="btn btn-success">
+            Publish
+        </a>
+    </div>
+    <div ng-if="model.publishMapping && !model.showModifiedMapping">
+        <a ng-click="model.unpublishMappingResults()"
+           class="btn btn-danger">
+            Callback Results
+        </a>
+    </div>
+    <p></p>
+    <div ng-if="!model.showModifiedMapping">
+        <a ng-click="model.modifyMappingResults()"
+           class="btn btn-primary">
+            Modify Results
+        </a>
     </div>
 
+    <p>&nbsp</p>
+    <p>&nbsp</p>
+    <div>
+        <!--<div ng-if="model.showModifiedMapping">-->
+        <a ng-if="model.showModifiedMapping" ng-click="model.originalMappingResults()"
+           class="btn btn-primary">
+            Back
+        </a>
+        <!--</div>-->
+        <!--<p></p>-->
+        <!--<div ng-if="model.showModifiedMapping">-->
+        <a ng-if="model.showModifiedMapping" ng-click="model.updateModifiedMappingResults()"
+           class="btn btn-success">
+            Update
+        </a>
+        <!--</div>-->
+        <!--<p></p>-->
+        <!--<div ng-if="model.showModifiedMapping && model.modPublishMapping">-->
+        <a ng-if="model.showModifiedMapping && model.modPublishMapping" ng-click="model.unpublishModifiedMappingResults()"
+           class="btn btn-danger">
+            Callback results
+        </a>
+        <!--</div>-->
+        <!--<div ng-if="model.showModifiedMapping && !model.modPublishMapping">-->
+        <a ng-if="model.showModifiedMapping && !model.modPublishMapping" ng-click="model.publishModifiedMappingResults()"
+           class="btn btn-success">
+            Publish
+        </a>
+        <!--</div>-->
+    </div>
 </div>
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container-fluid">
@@ -27,6 +107,5 @@
                 <span>Back</span>
             </a>
         </p>
-
     </div>
 </nav>

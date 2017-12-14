@@ -32,3 +32,43 @@ body{
     margin-top: 25px;
     line-height: 1.8;
 }
+
+.button {
+    display: inline-block;
+    padding: 2px 2px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #c9302c;
+    border: none;
+    border-radius: 5px;
+    /* box-shadow: 0 9px #999; */
+}
+
+.button:hover {background-color: #c0392b}
+
+.button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.button_add {
+    display: inline-block;
+    padding: 1px 1px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #1b6d85;
+    border: none;
+    border-radius: 5px;
+    /* box-shadow: 0 9px #999; */
+}
+
+.button_add:hover {background-color: #3091B2}

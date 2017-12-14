@@ -33,6 +33,36 @@
 
        <a class="btn btn-block btn-primary" href="#/applicationsForCource/{{position._id}}">Get Applications for Position</a>
     </div>
+
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+    <p>
+
+    </p>
+
+    <div class="col-sm-8 col-md-8">
+        <h2>TA assigned for your course(s):</h2>
+        <div ng-if="mappings">
+        <div ng-repeat="mapping in mappings">
+            <b><i>{{mapping.course}} - {{mapping.number}}</i></b><br/>
+            <ol>
+                <li ng-repeat="student in mapping.students">
+                    {{student.firstName}} {{student.lastName}}, {{student.email}}
+                </li>
+            </ol>
+        </div>
+        </div>
+        <div ng-if="!mappings">
+            <h3>Assignments yet to be made</h3>
+        </div>
+    </div>
 </div>
 
 

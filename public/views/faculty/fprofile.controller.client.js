@@ -9,8 +9,11 @@
     /* HTML and Java script communicate via scope */
     /* handles the JAVA Script */
 
-    function FProfileController($routeParams, $location, UserService, $rootScope,PositionService, applicationsService) {
+    function FProfileController($routeParams, $location, UserService, $rootScope,PositionService, applicationsService,
+                                AdminApplnService) {
         var vm = this;
+
+        vm.assignment = {};
 
         vm.rateStudent = rateStudent;
       //  vm.findAverage = findAverage;
@@ -32,6 +35,7 @@
                 .then(function (response) {
                     vm.user = response.data;
                     faculty = response.data;
+                    getAssignedStudents();
                 });
             findAllPositions();
 
@@ -262,6 +266,66 @@
                         vm.success="successfully updated!";
                     }else{
                         vm.error = "Some thing doesn't seem right here";
+                    }
+                });
+        }
+
+        function getAssignedStudents() {
+
+            var studentMappings = [];
+
+            AdminApplnService
+                .findAdminApplnByName("modified")
+                .then(function(response) {
+                    var modAdminApplnPublish = response.data;
+                    if(modAdminApplnPublish) {
+                        console.log("modAdminApplnPublish publish");
+                        console.log(modAdminApplnPublish);
+                        if(modAdminApplnPublish["isPublished"]) {
+                            for(var zz = 0; zz < modAdminApplnPublish["mappings"].length; zz++) {
+                                if(faculty.username == modAdminApplnPublish["mappings"][zz].profUsername) {
+                                    var posStudentMapping = {};
+                                    posStudentMapping["course"] = modAdminApplnPublish["mappings"][zz].positionName;
+                                    posStudentMapping["number"] = modAdminApplnPublish["mappings"][zz].number;
+                                    posStudentMapping["students"] = modAdminApplnPublish["mappings"][zz].students;
+                                    studentMappings.push(posStudentMapping);
+                                }
+                            }
+                            $rootScope.mappings = studentMappings;
+                            return;
+                        } else {
+                            AdminApplnService
+                                .findAdminApplnByName("original")
+                                .then(function(response) {
+                                    var adminApplnPublish = response.data;
+                                    console.log("adminAppln publish");
+                                    console.log(adminApplnPublish);
+                                    if(adminApplnPublish) {
+                                        if(adminApplnPublish["isPublished"]) {
+                                            for(var zz = 0; zz < adminApplnPublish["mappings"].length; zz++) {
+                                                if(faculty.username == adminApplnPublish["mappings"][zz].profUsername) {
+                                                    var posStudentMapping = {};
+                                                    posStudentMapping["course"] = adminApplnPublish["mappings"][zz].positionName;
+                                                    posStudentMapping["number"] = adminApplnPublish["mappings"][zz].number;
+                                                    posStudentMapping["students"] = adminApplnPublish["mappings"][zz].students;
+                                                    studentMappings.push(posStudentMapping);
+                                                }
+                                            }
+                                            $rootScope.mappings = studentMappings;
+                                            return;
+                                        } else {
+                                            $rootScope.mappings = false;
+                                            return;
+                                        }
+                                    } else {
+                                        console.log("Cannot happen as document must be in DB.");
+                                    }
+                                }, function(error) {
+                                    console.log("Cannot get originalAdminAppln :"+ error);
+                                });
+                        }
+                    } else {
+                        console.log("Cannot happen as document must be in DB.");
                     }
                 });
         }

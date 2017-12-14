@@ -18,8 +18,8 @@
     <h3></h3>
     <hr class="little-spacing">
 
-        <btn ng-click="model.scoreEdit()" class="btn btn-block btn-primary"><i class="glyphicon glyphicon-pencil"></i> Edit </btn>
-        <btn ng-if="model.isFirst" ng-click="model.save(model.displayScore)" class="btn btn-block btn-primary">
+        <btn ng-click="model.scoreEdit()" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Edit </btn>
+        <btn ng-if="model.isFirst" ng-click="model.save(model.displayScore)" class="btn btn-success">
             <i class="glyphicon glyphicon-ok"></i> Save </btn>
     <div ng-show="model.userdetailsedit">
     <h3>Recommendation: <input type="text"  class="form-control small-text" ng-model="model.updateScore.recommendation">%</h3>
@@ -30,8 +30,8 @@
     <h3>Availability: <input type="text"  class="form-control small-text" ng-model="model.updateScore.availability">%</h3>
     <h3>Availability ratio: <input type="text"  class="form-control small-text" ng-model="model.updateScore.availabilityRatio"></h3>
     <h3>Grade Ratio: <input type="text"  class="form-control small-text" ng-model="model.updateScore.gradRatio"></h3>
-        <btn ng-if="!model.isFirst" ng-click="model.scoreUpdate(model.updateScore)" class="btn btn-block btn-primary"><i class="glyphicon glyphicon-pencil"></i> Update </btn>
-        <btn ng-click="model.scoreEditCancel()" class="btn btn-block btn-primary"><i class="glyphicon glyphicon-remove"></i> Cancel </btn>
+        <btn ng-if="!model.isFirst" ng-click="model.scoreUpdate(model.updateScore)" class="btn btn-success"><i class="glyphicon glyphicon-pencil"></i> Update </btn>
+        <btn ng-click="model.scoreEditCancel()" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel </btn>
     </div>
 </div>
 <nav class="navbar navbar-inverse navbar-fixed-bottom">

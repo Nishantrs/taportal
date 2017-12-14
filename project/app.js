@@ -10,5 +10,6 @@ module.exports = function (app) {
     require("./services/position.service.server.js")(app,models);
     require("./services/application.service.server.js")(app,models);
     require("./services/score.service.server.js")(app,models);
+    require("./services/adminApplication.service.server")(app,models);
 };
 

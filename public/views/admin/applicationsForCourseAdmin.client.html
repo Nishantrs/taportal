@@ -2,14 +2,93 @@
 <div class="container-fluid">
     <h1>Applications for {{model.Position.course}} TA Positions</h1>
     <br>
-    <div>
+    <div ng-if="!model.displayProfPreference">
         <a ng-click="model.showStudentsByProfPreference()"
            class="btn btn-block btn-primary">
             Get Professor Preference
         </a>
     </div>
+    <div ng-if="model.displayProfPreference">
+        <a ng-click="model.showApplications()"
+           class="btn btn-block btn-primary">
+            Back
+        </a>
+    </div>
     <br>
-    <div class="table-responsive">
+    <div class="table-responsive" ng-if="model.displayProfPreference">
+        <h1>Professor Preferred Selection</h1>
+        <table class="table table-hover">
+            <th><a ng-click="model.orderByField='priority';
+                             model.reverseSort = !model.reverseSort">
+                Priority
+            </a>
+            </th>
+
+            <th><a ng-click="model.orderByField='gpa';
+                             model.reverseSort = !model.reverseSort">
+                GPA
+            </a>
+            </th>
+            <th>
+                Resume
+            </th>
+            <th>
+                Email
+            </th>
+            <th><a ng-click="model.orderByField='previouslyTaken';
+                             model.reverseSort = !model.reverseSort">
+                Previously Taken
+            </a>
+            </th>
+
+            <th><a ng-click="model.orderByField='gradeObtained';
+                             model.reverseSort = !model.reverseSort">
+                Grade Obtained
+            </a>
+            </th>
+
+            <th><a ng-click="model.orderByField='beenTASemester';
+                             model.reverseSort = !model.reverseSort">
+                Been TA Semester
+            </a>
+            </th>
+
+            <th><a ng-click="model.orderByField='availability';
+                             model.reverseSort = !model.reverseSort">
+                Availability
+            </a>
+            </th>
+
+            <th>User</th>
+
+            <th><a ng-click="model.orderByField='ratingvalue';
+                             model.reverseSort = !model.reverseSort">
+                Rating
+            </a>
+            </th>
+
+            <th><a ng-click="model.orderByField='score';
+                             model.reverseSort = !model.reverseSort">
+                Score
+            </a>
+            </th>
+
+            <tr ng-repeat="profPreferredAppln in profPreferredApplns| orderBy:model.orderByField : model.reverseSort">
+                <td>{{ profPreferredAppln.priority }}</td>
+                <td>{{profPreferredAppln.gpa}}</td>
+                <td><a ng-href="{{profPreferredAppln.resumeURL}}">Link</a></td>
+                <td>{{profPreferredAppln.email}}</td>
+                <td>{{ profPreferredAppln.previouslyTaken }}</td>
+                <td>{{ profPreferredAppln.gradeObtained }}</td>
+                <td>{{ profPreferredAppln.beenTASemester }}</td>
+                <td>{{ profPreferredAppln.availability }}</td>
+                <td><a href="#/UserInfo/{{profPreferredAppln._user}}">{{ profPreferredAppln.username }}</a></td>
+                <td> {{profPreferredAppln.ratingvalue}} </td>
+                <td> {{profPreferredAppln.score}} </td>
+            </tr>
+        </table>
+    </div>
+    <div class="table-responsive" ng-if="!model.displayProfPreference">
         <table class="table table-hover">
             <!-- Table header--------->
             <!-- Header for Position-->
@@ -151,15 +230,7 @@
 
                 </td>
             </tr>
-
-
         </table>
-
-
-
-
-
-
     </div>
 
 

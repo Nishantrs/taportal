@@ -8,7 +8,8 @@ module.exports  = function () {
         semesterModel : require ("./user/semester.model.server")(),
         positionModel: require ("./user/position.model.server")(),
         applicationModel: require("./user/application.model.server")(),
-        scoreModel: require("./user/score.model.server")()
+        scoreModel: require("./user/score.model.server")(),
+        adminApplicationModel: require("./user/adminApplication.model.server")()
     };
     return models;
 };

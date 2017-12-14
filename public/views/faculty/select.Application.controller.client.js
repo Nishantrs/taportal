@@ -22,7 +22,7 @@
         vm.rateStudent = rateStudent;
         //  vm.findAverage = findAverage;
         var faculty;
-        vm.possss;
+        //vm.possss;
         vm.avg1;
         vm.apps;
         vm.getApplications = getApplications;
